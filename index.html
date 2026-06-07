@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FysioDanmark Brøndby — Dit tværfaglige sundhedshus</title>
+<link rel="stylesheet" href="design-guide.css">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="billeder.js" defer></script>
+<script src="ikoner.js" defer></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-tekst);
+  color: var(--farve-tekst-moerk);
+  line-height: 1.6;
+  background: var(--farve-baggrund-hvid);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-normal);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: #77B834; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ══════════════════════════════════════
+   TOP BAR
+══════════════════════════════════════ */
+.top-bar {
+  background: #f7f7f3;
+  padding: 7px 0;
+  font-size: 13px;
+  color: #666;
+  border-bottom: 1px solid #e0e0d8;
+}
+.top-bar-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 32px;
+  display: flex; gap: 24px; justify-content: flex-end; flex-wrap: wrap;
+}
+.top-bar-item { display: inline-flex; align-items: center; gap: 6px; }
+.top-bar-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+.top-bar a { color: #666; }
+
+/* ══════════════════════════════════════
+   MAIN NAV
+══════════════════════════════════════ */
+.main-nav {
+  background: white;
+  border-bottom: 1px solid #e8e8e0;
+  position: sticky; top: 0; z-index: 200;
+}
+.main-nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
+}
+
+/* Logo */
+.logo-wrap { display: flex; align-items: center; cursor: pointer; flex-shrink: 0; }
+.logo-wrap img { height: var(--logo-nav-hoejde); width: auto; display: block; }
+.logo-text-fallback { display: flex; align-items: baseline; gap: 2px; }
+.logo-text-fysio { font-weight: 700; font-size: 22px; color: #555; letter-spacing: 2px; }
+.logo-text-dan   { font-size: 22px; color: #77B834; letter-spacing: 2px; font-weight: 700; }
+.logo-text-mark  { font-size: 22px; color: #555; letter-spacing: 2px; font-weight: 700; }
+.logo-text-sub   { font-size: 11px; color: #aaa; font-style: italic; margin-left: 8px; }
+
+/* Nav links */
+.nav-menu { display: flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 500; font-family: sans-serif; }
+
+/* Regular link */
+.nav-menu > a {
+  color: #444; padding: 8px 12px; letter-spacing: 0.3px;
+  white-space: nowrap; border-radius: 3px;
+  transition: color 0.15s;
+}
+.nav-menu > a:hover { color: #77B834; text-decoration: none; }
+
+/* Booking CTA */
+.nav-cta {
+  background: #77B834; color: white !important;
+  padding: 9px 20px; border-radius: 3px;
+  font-family: sans-serif;
+  font-weight: 700; font-size: 15px; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-left: 4px;
+  transition: background 0.15s;
+}
+.nav-cta:hover { background: #68a52d !important; text-decoration: none; }
+
+/* DROPDOWN wrapper */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  display: flex; align-items: center; gap: 5px;
+  color: #444; padding: 8px 12px; cursor: pointer;
+  font-family: sans-serif;
+  font-size: 14px; font-weight: 500; white-space: nowrap;
+  border-radius: 3px; transition: color 0.15s;
+  user-select: none;
+}
+.nav-dropdown-toggle:hover,
+.nav-dropdown:hover .nav-dropdown-toggle { color: #77B834; }
+.nav-dropdown-toggle.active { color: #77B834; }
+.nav-dropdown-arrow {
+  width: 0; height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 0.2s;
+  margin-top: 1px;
+}
+.nav-dropdown:hover .nav-dropdown-arrow { transform: rotate(180deg); }
+
+.dropdown-menu {
+  position: absolute; top: calc(100% + 1px); left: 0;
+  background: white; border: 1px solid #e0e0d8;
+  border-top: 2px solid #77B834;
+  border-radius: 0 0 6px 6px;
+  min-width: 210px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
+  z-index: 300;
+}
+.nav-dropdown:hover .dropdown-menu {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+.dropdown-menu a {
+  display: block; padding: 11px 18px;
+  color: #444; font-size: 14px; font-weight: 400;
+  border-bottom: 1px solid #f0f0e8;
+  transition: background 0.12s, color 0.12s;
+  cursor: pointer;
+}
+.dropdown-menu a:last-child { border-bottom: none; }
+.dropdown-menu a:hover { background: #f5f9ee; color: #77B834; text-decoration: none; }
+.dropdown-menu .badge-ny {
+  display: inline-block; background: #77B834; color: white;
+  font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 3px;
+  letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   BREADCRUMB
+══════════════════════════════════════ */
+.breadcrumbs { background: #e8eae0; padding: 8px 0; font-size: 13px; color: #666; }
+.breadcrumbs-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.breadcrumbs a { color: #666; cursor: pointer; }
+.breadcrumbs a:hover { text-decoration: underline; }
+#breadcrumb-bar { display: none; }
+#breadcrumb-bar.visible { display: block; }
+
+/* ══════════════════════════════════════
+   PANELS
+══════════════════════════════════════ */
+.page-panel { display: none; }
+.page-panel.active { display: block; }
+
+/* ══════════════════════════════════════
+   FORSIDE — HERO
+══════════════════════════════════════ */
+.home-hero {
+  position: relative;
+  min-height: var(--hero-min-hoejde);
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background: #2a3a2a; /* fallback hvis billede mangler */
+}
+.home-hero-bg {
+  position: absolute; inset: 0;
+  background-image: var(--hero-billede);
+  background-size: cover;
+  background-position: center 40%;
+  filter: brightness(var(--hero-moerkhed)) saturate(0.85);
+}
+.home-hero-content {
+  position: relative; z-index: 2;
+  padding: 90px 24px 80px;
+  max-width: 900px;
+}
+.home-hero-logo {
+  height: 64px; width: auto; margin: 0 auto 32px;
+  filter: brightness(10) saturate(0);
+}
+/* "VELKOMMEN TIL" label over titlen */
+.home-hero-overtitle {
+  font-family: var(--font-hoved);
+  font-size: var(--fs-hero-overtitle); font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-overtitle);
+  text-transform: uppercase; color: var(--farve-groen);
+  margin: 0 0 8px; display: block;
+}
+.home-hero h1 {
+  font-family: var(--font-hoved);
+  font-size: var(--fs-hero-h1); font-weight: var(--fw-extrabold);
+  color: var(--farve-hvid);
+  text-transform: uppercase; letter-spacing: var(--ls-hero-h1);
+  margin: 0 0 6px; line-height: 1.05;
+}
+.home-hero-tagline {
+  font-family: var(--font-hoved);
+  font-size: var(--fs-hero-tagline); font-weight: var(--fw-light);
+  color: rgba(255,255,255,0.92);
+  text-transform: uppercase; letter-spacing: var(--ls-hero-tagline);
+  margin: 0 0 24px; line-height: 1.15; display: block;
+}
+.home-hero-desc {
+  font-family: var(--font-tekst);
+  font-size: var(--fs-hero-desc); font-weight: var(--fw-normal);
+  color: rgba(255,255,255,0.78);
+  max-width: 580px; margin: 0 auto 36px; line-height: 1.7;
+}
+.home-hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-hero-primary {
+  background: var(--farve-groen); color: var(--farve-hvid);
+  padding: 13px 32px; border-radius: var(--radius-knap);
+  font-family: var(--font-hoved);
+  font-weight: var(--fw-bold); font-size: var(--fs-knap);
+  letter-spacing: var(--ls-knap);
+  text-transform: uppercase; transition: background 0.2s; cursor: pointer;
+}
+.btn-hero-primary:hover { background: var(--farve-groen-moerk); text-decoration: none; }
+.btn-hero-secondary {
+  background: transparent; color: var(--farve-hvid);
+  border: 2px solid rgba(255,255,255,0.55);
+  padding: 11px 30px; border-radius: var(--radius-knap);
+  font-family: var(--font-hoved);
+  font-weight: var(--fw-semibold); font-size: var(--fs-knap);
+  letter-spacing: var(--ls-knap);
+  text-transform: uppercase; transition: all 0.2s; cursor: pointer;
+}
+.btn-hero-secondary:hover { border-color: white; background: rgba(255,255,255,0.1); text-decoration: none; }
+
+/* ══════════════════════════════════════
+   FORSIDE — KORT-SEKTION
+══════════════════════════════════════ */
+.home-cards-section {
+  background: #ffffff; padding: 64px 0 72px;
+}
+.home-cards-section-header {
+  text-align: center; margin-bottom: 40px;
+}
+.home-cards-section-header h2 {
+  font-family: sans-serif;
+  font-size: 36px; font-weight: 700; color: #2c3e2d;
+  margin: 0 0 10px; text-transform: none; letter-spacing: 0.5px;
+}
+.home-cards-section-header p {
+  font-size: 15px; color: #888; margin: 0;
+}
+.home-cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; max-width: 1100px; margin: 0 auto; padding: 0 32px;
+}
+.home-card {
+  background: white; border: 1px solid #e0e0d8; border-radius: 10px;
+  padding: 32px 28px 28px; cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s;
+}
+.home-card:hover {
+  box-shadow: 0 8px 32px rgba(44,62,45,0.11);
+  border-color: #b6d48a; transform: translateY(-3px);
+}
+.home-card-icon {
+  width: 50px; height: 50px; background: #77B834; border-radius: 50%;
+  margin-bottom: 18px;
+}
+.home-card-category {
+  font-size: 12px; font-weight: 700; color: #77B834;
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+}
+.home-card h3 {
+  font-family: sans-serif;
+  font-size: 22px; color: #2c3e2d; margin: 0 0 12px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+}
+.home-card p { font-size: 14px; color: #666; margin: 0 0 20px; line-height: 1.6; }
+.home-card-link {
+  font-size: 14px; color: #77B834; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.home-card-link::after { content: "→"; transition: transform 0.15s; }
+.home-card:hover .home-card-link::after { transform: translateX(4px); }
+.badge-new {
+  display: inline-block; background: #77B834; color: white;
+  font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px;
+  letter-spacing: 0.5px; margin-left: 8px; vertical-align: middle;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════════
+   UNDERSIDE: FÆLLES SECTION-STYLES
+══════════════════════════════════════ */
+section { padding: 60px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+h1, h2, h3 { line-height: 1.15; margin-top: 0; }
+h1 {
+  font-family: var(--font-hoved);
+  font-size: var(--fs-h1); font-weight: var(--fw-bold);
+  margin-bottom: 16px; color: var(--farve-tekst-moerk);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+h2 {
+  font-family: var(--font-hoved);
+  font-size: var(--fs-h2); font-weight: var(--fw-bold);
+  margin-bottom: 12px;
+  color: var(--farve-groen); text-transform: uppercase;
+  letter-spacing: var(--ls-h2);
+}
+h3 {
+  font-family: var(--font-tekst);
+  font-size: var(--fs-h3); font-weight: var(--fw-semibold);
+  margin-bottom: 10px; color: var(--farve-groen);
+}
+p { margin: 0 0 16px; color: var(--farve-tekst-normal); font-size: var(--fs-body); font-family: var(--font-tekst); line-height: 1.65; }
+
+.hero { background: #F7F7F7; padding: 70px 0; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.hero-subtitle {
+  font-family: sans-serif;
+  font-size: 17px; font-weight: 400; color: #555; margin-bottom: 28px; line-height: 1.65;
+}
+.btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary, .btn-secondary {
+  display: inline-block; padding: 13px 28px; border-radius: 2px;
+  font-family: sans-serif;
+  font-weight: 700; font-size: 15px;
+  text-decoration: none; transition: all 0.2s; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;
+}
+.btn-primary { background: var(--farve-groen); color: var(--farve-hvid); }
+.btn-primary:hover { background: var(--farve-groen-moerk); text-decoration: none; }
+.btn-secondary { background: var(--farve-graa-cta); color: var(--farve-hvid); }
+.btn-secondary:hover { background: var(--farve-graa-hover); text-decoration: none; }
+
+/* ── Billedslot — viser placeholder indtil billede er registreret i billeder.js ── */
+.img-slot {
+  position: relative;
+  background: #f4f6f0;
+  border: 2px dashed #b8c8a0;
+  border-radius: 12px;
+  min-height: 320px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; padding: 32px;
+  overflow: hidden;
+}
+.img-slot.rounded { border-radius: 16px; }
+
+/* ID-badge øverst i hjørnet */
+.img-slot::before {
+  content: attr(data-img-id);
+  position: absolute; top: 0; left: 0; right: 0;
+  background: #77B834; color: white;
+  font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  padding: 5px 12px; text-align: center;
+  font-family: sans-serif; text-transform: uppercase;
+}
+
+.img-slot-icon  { width: 36px; height: 36px; color: #b0c090; margin: 28px auto 10px; display: block; }
+.img-slot-title { font-size: 13px; font-weight: 600; color: #6a8050; margin-bottom: 6px; letter-spacing: 0.5px; }
+.img-slot-desc  { font-size: 12px; color: #9aaa88; line-height: 1.55; max-width: 280px; }
+.img-slot-format {
+  margin-top: 14px; padding: 4px 10px;
+  background: #e8f0da; border-radius: 4px;
+  font-size: 11px; color: #6a8050; font-weight: 600; letter-spacing: 0.5px;
+}
+
+/* Når billede er indsat af billeder.js */
+.img-slot.img-slot--loaded {
+  padding: 0; border: none; background: transparent;
+}
+.img-slot.img-slot--loaded::before { display: none; }
+
+/* Kort-slot der bruges inde i price-image-wrap */
+.img-slot.price-slot {
+  min-height: 380px; border-radius: 10px; margin: 0;
+}
+
+/* Map-slot */
+.img-slot.map-slot {
+  background: #e8ede0; min-height: 320px; border-radius: 10px;
+  border-color: #c0c0b0;
+}
+.img-slot.map-slot::before { background: #555; }
+
+.section-practitioner { background: #ffffff; }
+.practitioner-grid { display: grid; grid-template-columns: 40% 60%; gap: 48px; align-items: start; }
+.practitioner-bullets { list-style: none; padding: 0; margin: 16px 0 0; }
+.practitioner-bullets li {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 15px; color: #555; padding: 6px 0;
+}
+.practitioner-bullets li::before { content: "✓"; color: #77B834; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+.team-box {
+  margin-top: 24px; padding: 20px 24px; background: #f7f7f7;
+  border-left: 3px solid #77B834; border-radius: 6px;
+}
+.team-box-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.team-box-name { font-size: 16px; font-weight: 700; color: #2c3e2d; margin-bottom: 4px; }
+.team-box-title { font-size: 14px; color: #666; margin: 0; }
+
+.section-treatments { background: #F7F7F7; }
+.treatments-intro { max-width: 900px; margin-bottom: 32px; }
+.h3-treatments {
+  font-family: var(--font-hoved);
+  color: var(--farve-tekst-moerk); font-size: var(--fs-h3-behandling);
+  font-weight: var(--fw-semibold);
+  margin-top: 24px; margin-bottom: 18px; letter-spacing: 0.5px;
+}
+.treatments-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+.treatment-card { background: white; border: 1px solid #e0e0d8; border-radius: 10px; padding: 24px; }
+.treatment-icon {
+  width: 44px; height: 44px; background: #f0f4e6; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.treatment-icon svg { width: 20px; height: 20px; color: #77B834; }
+.treatment-card h3 {
+  font-family: sans-serif;
+  color: #2c3e2d; font-size: 16px; font-weight: 600; margin-bottom: 8px;
+}
+.treatment-card p { font-size: 14px; color: #555; margin: 0; line-height: 1.55; }
+
+.conditions-block { margin-top: 36px; padding-top: 28px; border-top: 1px solid #e0e0d8; }
+.conditions-grid {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.condition-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: #fff; border: 1px solid #e0e0d8; border-radius: 10px;
+  padding: 18px 16px; transition: box-shadow 0.2s, border-color 0.2s;
+}
+.condition-card:hover { box-shadow: 0 4px 16px rgba(44,62,45,0.09); border-color: #b6d48a; }
+.condition-icon {
+  flex-shrink: 0; width: 44px; height: 44px; background: #f0f4e6; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.condition-icon svg { width: 20px; height: 20px; color: #77B834; }
+.condition-card-text strong { display: block; font-size: 14px; color: #2c3e2d; font-weight: 600; margin-bottom: 4px; }
+.condition-card-text span { font-size: 13px; color: #888; line-height: 1.45; }
+
+.section-multidisciplinary { background: #ffffff; }
+.multi-grid { display: grid; grid-template-columns: 60% 40%; gap: 40px; align-items: center; }
+.disciplines-box { background: white; border: 1px solid #c0c2b8; border-radius: 12px; padding: 28px; }
+.disciplines-label { font-size: 11px; color: #888; text-align: center; letter-spacing: 2px; margin-bottom: 18px; text-transform: uppercase; font-weight: 500; }
+.disciplines-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.discipline-card { background: #f0f4e6; border-radius: 8px; padding: 16px; text-align: center; }
+.discipline-card svg { width: 22px; height: 22px; color: #77B834; display: block; margin: 0 auto 8px; }
+.discipline-card-label { font-size: 13px; color: #2c3e2d; font-weight: 500; }
+.disciplines-caption { font-size: 12px; color: #888; text-align: center; margin-top: 14px; font-style: italic; }
+
+/* ── Ikonhjælpeklasser (se ikoner.md) ── */
+.home-card-icon svg { width: 26px; height: 26px; color: white; }
+.top-bar-item svg  { width: 14px; height: 14px; color: #888; flex-shrink: 0; }
+.ikon-sm svg { width: 14px; height: 14px; }
+.ikon-md svg { width: 20px; height: 20px; }
+.ikon-lg svg { width: 26px; height: 26px; }
+.ikon-xl  { font-size: 36px; }
+.ikon-groen { color: #77B834; }
+.ikon-graa  { color: #82807E; }
+.ikon-hvid  { color: #ffffff; }
+.ikon-moerk { color: #2c3e2d; }
+
+.section-prices { background: #F7F7F7; }
+.prices-grid { display: grid; grid-template-columns: 35% 65%; gap: 32px; align-items: start; }
+.price-image-wrap { position: relative; min-height: 380px; border-radius: 10px; overflow: hidden; }
+.price-image-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #77B834; color: white; padding: 12px; font-size: 13px;
+  font-weight: 500; text-align: center; letter-spacing: 1.5px;
+}
+.price-table { width: 100%; border-collapse: collapse; }
+.price-table tr { border-bottom: 1px solid #f0efe7; }
+.price-table tr:nth-child(even) { background: #faf9f3; }
+.price-table td { padding: 14px 16px; font-size: 15px; color: #2c3e2d; }
+.price-table td:last-child { text-align: right; font-weight: 500; white-space: nowrap; }
+.price-disclaimer { font-size: 13px; color: #888; font-style: italic; margin-top: 14px; padding: 0 16px; }
+
+.section-location { background: #ffffff; }
+.location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 28px; }
+/* .map-placeholder erstattet af .img-slot.map-slot — se img-slot CSS */
+.address-block { font-size: 16px; color: #2c3e2d; line-height: 1.7; margin-bottom: 16px; }
+.address-block strong { font-weight: 500; }
+.coverage-area { font-size: 14px; color: #777; line-height: 1.7; }
+
+.section-faq { background: #F7F7F7; }
+.faq-list { margin-top: 24px; }
+details.faq-item {
+  background: #ffffff; border-radius: 8px; margin-bottom: 8px;
+  border: 1px solid #e0e0d8; transition: border-color 0.2s;
+}
+details.faq-item[open] { border-color: #d0e0b8; }
+details.faq-item summary {
+  padding: 18px 24px; cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px; font-weight: 600; color: #2c3e2d;
+  list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+details.faq-item summary::-webkit-details-marker { display: none; }
+details.faq-item summary::after {
+  content: ""; width: 12px; height: 12px; flex-shrink: 0;
+  border-right: 2px solid #77B834; border-bottom: 2px solid #77B834;
+  transform: rotate(45deg); transition: transform 0.2s; margin-top: -4px;
+}
+details.faq-item[open] summary::after { transform: rotate(-135deg); margin-top: 4px; }
+details.faq-item .faq-answer { padding: 0 24px 20px; font-size: 15px; color: #555; line-height: 1.65; }
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+.site-footer { background: var(--farve-footer); color: var(--farve-hvid); padding: 44px 0; }
+.footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+.footer-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+.footer-logo-wrap { margin-bottom: 14px; }
+.footer-logo-wrap img { height: var(--logo-footer-hoejde); filter: brightness(10) saturate(0); opacity: 0.85; }
+.footer-heading {
+  font-family: sans-serif;
+  color: #fff; font-size: 14px; font-weight: 700; margin: 0 0 12px;
+  text-transform: uppercase; letter-spacing: 2px;
+}
+.footer-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+.footer-text a { color: rgba(255,255,255,0.75); }
+.footer-text a:hover { color: white; text-decoration: underline; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 32px; padding-top: 20px;
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 960px) {
+  .home-cards-grid { grid-template-columns: 1fr; max-width: 480px; }
+  .hero-grid, .practitioner-grid, .multi-grid, .prices-grid, .location-grid, .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .treatments-grid, .conditions-grid { grid-template-columns: 1fr; }
+  .nav-menu { display: none; }
+  section { padding: 40px 0; }
+  .hero { padding: 48px 0; }
+  .home-hero h1 { font-size: 30px; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: 26px; }
+  .btn-primary, .btn-secondary, .btn-hero-primary, .btn-hero-secondary { width: 100%; text-align: center; }
+  .home-hero-btns { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     TOP BAR
+══════════════════════════════════════ -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <span class="top-bar-item"><i data-ikon-id="TOPBAR-TELEFON"></i> +45 43 43 73 00</span>
+    <span class="top-bar-item"><i data-ikon-id="TOPBAR-ADRESSE"></i> Park Allé 156, 2605 Brøndby</span>
+    <span class="top-bar-item"><i data-ikon-id="TOPBAR-EMAIL"></i> info@fysiodanmarkbrondby.dk</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION MED DROPDOWNS
+══════════════════════════════════════ -->
+<nav class="main-nav">
+  <div class="main-nav-inner">
+
+    <!-- Logo -->
+    <span class="logo-wrap" onclick="showPanel('home')">
+      <img src="assets/images/logo.png" alt="FysioDanmark Brøndby"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <span class="logo-text-fallback" style="display:none">
+        <span class="logo-text-fysio">FYSIO</span><span class="logo-text-dan">DAN</span><span class="logo-text-mark">MARK</span>
+        <span class="logo-text-sub">Brøndby</span>
+      </span>
+    </span>
+
+    <div class="nav-menu">
+
+      <!-- Fagklinikker dropdown -->
+      <div class="nav-dropdown" id="dd-fagklinikker">
+        <span class="nav-dropdown-toggle" id="toggle-kiro">
+          Fagklinikker <span class="nav-dropdown-arrow"></span>
+        </span>
+        <div class="dropdown-menu">
+          <a onclick="showPanel('kiro')">Kiropraktor klinik</a>
+          <a style="color:#bbb; cursor:default; pointer-events:none;">Fysioterapi klinik <span style="font-size:11px">(kommer)</span></a>
+          <a style="color:#bbb; cursor:default; pointer-events:none;">Psykolog klinik <span style="font-size:11px">(kommer)</span></a>
+          <a style="color:#bbb; cursor:default; pointer-events:none;">Akupunktur klinik <span style="font-size:11px">(kommer)</span></a>
+        </div>
+      </div>
+
+      <!-- Specialist enheder dropdown -->
+      <div class="nav-dropdown" id="dd-specialist">
+        <span class="nav-dropdown-toggle" id="toggle-ryg">
+          Specialist enheder <span class="nav-dropdown-arrow"></span>
+        </span>
+        <div class="dropdown-menu">
+          <a onclick="showPanel('ryg')">Rygspecialist Enheden <span class="badge-ny">NY</span></a>
+        </div>
+      </div>
+
+      <a style="color:#444; padding:8px 12px;">Erhverv</a>
+      <a style="color:#444; padding:8px 12px;">Priser</a>
+      <a class="nav-cta">Booking</a>
+      <a style="color:#444; padding:8px 12px;">Kontakt</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Breadcrumb — kun synlig på undersider -->
+<div id="breadcrumb-bar">
+  <div class="breadcrumbs">
+    <div class="breadcrumbs-inner" id="breadcrumb-inner"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     PANEL: FORSIDE
+══════════════════════════════════════ -->
+<div class="page-panel active" id="panel-home">
+
+  <!-- Hero med bygningsfoto -->
+  <div class="home-hero">
+    <div class="home-hero-bg" data-img-id="HOME-HERO" data-img-type="bg"></div>
+    <div class="home-hero-content">
+      <span class="home-hero-overtitle">Velkommen til</span>
+      <h1>FysioDanmark Brøndby</h1>
+      <span class="home-hero-tagline">Dit tværfaglige sundhedshus</span>
+      <p class="home-hero-desc">Vi har samlet en række af de bedste klinikker og faglige kompetencer under samme tag. Vi tager dig i hånden og hjælper dig til det bedste og mest relevante tilbud for netop dit problem.</p>
+      <div class="home-hero-btns">
+        <span class="btn-hero-primary">Book tid</span>
+        <span class="btn-hero-secondary">Dine tilskudsmuligheder</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tre-kort sektion -->
+  <div class="home-cards-section">
+    <div class="home-cards-section-header">
+      <h2 style="font-size:26px; text-transform:none; letter-spacing:0; color:#2c3e2d;">Ét sundhedshus — tre indgange</h2>
+      <p>Find den rigtige vej ind til den hjælp, du har brug for</p>
+    </div>
+    <div class="home-cards-grid">
+
+      <div class="home-card" onclick="showPanel('kiro')">
+        <div class="home-card-icon"><i data-ikon-id="HOME-KORT-KLINIK"></i></div>
+        <div class="home-card-category">Vores fagprofessioner</div>
+        <h3>Fagklinikker</h3>
+        <p>Fysioterapi, kiropraktik, speciallæge, psykolog, akupunktur og genoptræning mv. — alle under samme tag, i tæt samarbejde med dig.</p>
+        <span class="home-card-link">Se klinikkerne</span>
+      </div>
+
+      <div class="home-card" onclick="showPanel('ryg')">
+        <div class="home-card-icon"><i data-ikon-id="HOME-KORT-SPECIALIST"></i></div>
+        <div class="home-card-category">Tværfaglige forløb</div>
+        <h3>Specialist enheder <span class="badge-new">NY</span></h3>
+        <p>Komplekse problemstillinger kræver ofte mere end én faggruppe. Vores specialenheder samler ekspertisen i koordinerede forløb.</p>
+        <div style="background:#f0f9e4; border-radius:6px; padding:10px 14px; margin-bottom:20px; font-size:14px; color:#77B834; font-weight:500;">
+          Nyt: Rygspecialist Enhed
+        </div>
+        <span class="home-card-link">Se specialenheder</span>
+      </div>
+
+      <div class="home-card" style="cursor:default;" onclick="">
+        <div class="home-card-icon"><i data-ikon-id="HOME-KORT-ERHVERV"></i></div>
+        <div class="home-card-category">Til virksomheder</div>
+        <h3>Erhverv</h3>
+        <p>360° Sundhed på arbejdspladsen — styrk trivsel, tiltræk de rette medarbejdere og reducer sygefravær.</p>
+        <span class="home-card-link" style="color:#aaa;">Læs om erhvervsløsninger</span>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /panel-home -->
+
+
+<!-- ══════════════════════════════════════
+     PANEL: KIROPRAKTOR KLINIK
+══════════════════════════════════════ -->
+<div class="page-panel" id="panel-kiro">
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <h1>Velkommen til vores kiropraktor klinik</h1>
+          <p class="hero-subtitle">Her bliver du mødt af et erfarent og professionelt kiropraktor team. Vi kombinerer vores erfaring med nyeste viden på området, så vi hurtigt og trygt kan bringe dig tilbage til din hverdag uden smerter.</p>
+          <div class="btn-group">
+            <span class="btn-primary">Book tid online</span>
+            <span class="btn-secondary" onclick="document.getElementById('kiro-priser').scrollIntoView({behavior:'smooth'})">Se priser</span>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot rounded" data-img-id="KIRO-HERO">
+            <i data-ikon-id="UI-KAMERA" class="img-slot-icon"></i>
+            <div class="img-slot-title">Hero — Kiropraktor klinik</div>
+            <div class="img-slot-desc">Jørgen i konsultation med patient. Varm lyssætning, roligt klinikmiljø.</div>
+            <div class="img-slot-format">16:10 · min. 1200×750px · WebP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-practitioner">
+    <div class="container">
+      <div class="practitioner-grid">
+        <div>
+          <div class="img-slot rounded" data-img-id="KIRO-PORTRAET">
+            <i data-ikon-id="UI-PERSON" class="img-slot-icon"></i>
+            <div class="img-slot-title">Portræt — Jørgen Kilsgaard</div>
+            <div class="img-slot-desc">Professionelt portræt, neutralt klinikmiljø.</div>
+            <div class="img-slot-format">3:4 · min. 600×800px · WebP</div>
+          </div>
+        </div>
+        <div>
+          <h2>Vi er specialister i smerter fra led og muskler</h2>
+          <p>Vores kiropraktor klinik og <a onclick="showPanel('ryg')" style="cursor:pointer">tværfaglige rygspecialist enhed</a> ledes af kiropraktor Jørgen Kilsgaard. Jørgen har mange års erfaring fra både egen kiropraktorpraksis og som kiropraktor på rygkirurgisk afdeling i sygehussektoren.</p>
+          <p>Udover sin kiropraktoruddannelse har han desuden en master i folkesundhedsvidenskab (MPH) og har arbejdet med forebyggelsesprogrammer for muskel- og ledsmerter på arbejdspladser.</p>
+          <p>Med sin brede kliniske og tværfaglige erfaring og store indsigt i smerteproblematikker fra led og muskler, står Jørgen i spidsen for vores kiropraktor klinik. Klinikken ser typisk patienter med f.eks.:</p>
+          <ul class="practitioner-bullets">
+            <li>Smerter i lænderyggen og ned i benet</li>
+            <li>Smerter fra nakken og ud i skulderne</li>
+            <li>Smerter mellem skulderblade og ud i armen</li>
+          </ul>
+          <p style="margin-top:16px;">Derudover er klinikken også indgangen til vores <a onclick="showPanel('ryg')" style="cursor:pointer">rygspecialist enhed</a>, der er bemandet med et tværfagligt team af rygkirurg, fysioterapeuter, arbejdspladskonsulenter, m.fl.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-treatments">
+    <div class="container">
+      <h2>Skræddersyet forløb til netop dit problem</h2>
+      <div class="treatments-intro">
+        <p>Et behandlingsforløb bliver altid skræddersyet til netop dit smerteproblem og din situation. Det betyder også at et forløb altid starter med en grundig udspørgen til dit problem, hvordan og hvornår det startede, om du tidligere har haft lignende problemer og om hvordan det påvirker din dagligdag og dit arbejdsliv.</p>
+        <p>Herefter foretages en grundig undersøgelse af de pågældende led og muskler — som også kan omfatte andre områder. Efter samtale og undersøgelsen giver vi dig en samlet vurdering af dit problem, hvad vi kan gøre på den korte bane, og hvad du selv kan gøre på den lidt længere bane. Alt samles i en plan, der præsenteres for dig.</p>
+        <p>Hvis dit problem er mere komplekst eller sammensat, kan dit forløb være mere egnet til <a onclick="showPanel('ryg')" style="cursor:pointer">vores rygspecialist enhed</a>.</p>
+      </div>
+      <h3 class="h3-treatments">Et behandlingsforløb vil ofte indeholde en kombination af disse indsatser:</h3>
+      <div class="treatments-grid">
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="TREAT-LED"></i></div>
+          <h3>Ledfrigørende eller mobiliserende behandling</h3>
+          <p>Præcise, hurtige og skånsomme tryk, der øger bevægeligheden i fastlåste led i rygsøjlen, bækkenet eller nakken. Der tages altid hensyn til leddets og knoglernes tilstand, herunder eventuelle slidforandringer eller andre sygdomsforhold.</p>
+        </div>
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="TREAT-BLOEDDEL"></i></div>
+          <h3>Bløddelsbehandling</h3>
+          <p>Bløddelsbehandling er målrettet det omkringliggende støttevæv og spændte muskler for at dæmpe spændinger, irritationstilstande og lindre lokale smerter.</p>
+        </div>
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="TREAT-TRAENING"></i></div>
+          <h3>Fase specifik træning</h3>
+          <p>Fra aflastningsøvelser i den akutte fase til styrkende øvelser der stabiliserer dine led på sigt. Koordineres med vores fysioterapi klinik og træningscenter ved behov for længerevarende forløb.</p>
+        </div>
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="TREAT-UDDANNELSE"></i></div>
+          <h3>Patientuddannelse og ergonomisk rådgivning</h3>
+          <p>Konkrete råd om dit smerteproblem, din hverdag og dit arbejdsliv, så du hurtigst muligt kommer tilbage til din daglige funktion — og undgår tilbagefald.</p>
+        </div>
+      </div>
+      <div class="conditions-block">
+        <h3>Smerteproblemer vi typisk behandler</h3>
+        <p style="margin-bottom:18px;">Vores kiropraktorer kan hjælpe dig effektivt, hvis du oplever:</p>
+        <ul class="conditions-grid">
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="COND-NAKKE"></i></div>
+            <div class="condition-card-text">
+              <strong>Hold i ryg eller nakke</strong>
+              <span>Akut lumbago, hekseskud og nakkespænd med pludselig smerte og bevægeindskrænkning.</span>
+            </div>
+          </li>
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="COND-DISCUS"></i></div>
+            <div class="condition-card-text">
+              <strong>Diskusprolaps og nerverodsirritation/tryk</strong>
+              <span>Udstrålende smerter i benet eller armen som følge af irritation/tryk på nervestrukturer, muskler eller sener.</span>
+            </div>
+          </li>
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="COND-HOVED"></i></div>
+            <div class="condition-card-text">
+              <strong>Spændingshovedpine</strong>
+              <span>Kroniske eller tilbagevendende hovedpiner med oprindelse i spændte nakke- og skuldermuskler.</span>
+            </div>
+          </li>
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="COND-LED"></i></div>
+            <div class="condition-card-text">
+              <strong>Overbelastning og fastlåste led</strong>
+              <span>Skulder, hofte, knæ eller ankler — skader fra sport, gentagende bevægelser eller stillesiddende arbejde.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-multidisciplinary">
+    <div class="container">
+      <div class="multi-grid">
+        <div>
+          <h2>Dit tværfaglige sundhedshus i Brøndby</h2>
+          <h3>Hvorfor vælge os frem for en traditionel klinik?</h3>
+          <p>Når du vælger FysioDanmark Brøndby, vælger du ikke bare en kiropraktor klinik — du vælger et helt, sammenhængende sundhedshus under samme tag.</p>
+          <p>Den helt store fordel for dig som patient er vores tværfaglighed. Hvis vi i kiropraktor klinikken vurderer, at dit problem bedre varetages af en anden enhed i huset — enten alene eller i samarbejde — vil du altid blive præsenteret for det og dine muligheder. Vi gennemgår også dine tilskudsmuligheder.</p>
+          <p>Vi taler sammen på tværs af faggrupperne, sparrer om dit forløb og sikrer, at du altid modtager den mest effektive og koordinerede behandling.</p>
+        </div>
+        <div class="disciplines-box">
+          <div class="disciplines-label">Under ét tag</div>
+          <div class="disciplines-grid">
+            <div class="discipline-card"><i data-ikon-id="DISC-KIRO"></i><div class="discipline-card-label">Kiropraktik</div></div>
+            <div class="discipline-card"><i data-ikon-id="DISC-FYSIO"></i><div class="discipline-card-label">Fysioterapi</div></div>
+            <div class="discipline-card"><i data-ikon-id="DISC-AKUPUNKTUR"></i><div class="discipline-card-label">Akupunktur</div></div>
+            <div class="discipline-card"><i data-ikon-id="DISC-TRAENING"></i><div class="discipline-card-label">Træning</div></div>
+          </div>
+          <div class="disciplines-caption">Koordineret behandling på tværs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-prices" id="kiro-priser">
+    <div class="container">
+      <h2>Priser for kiropraktiske ydelser</h2>
+      <h3>Gennemskuelige priser uden overraskelser</h3>
+      <p style="margin-bottom:32px;">Herunder finder du oversigten over vores faste takster for kiropraktor ydelser.</p>
+      <div class="prices-grid">
+        <div>
+          <div class="price-image-wrap">
+            <div class="img-slot price-slot" data-img-id="KIRO-ACTION">
+              <i data-ikon-id="UI-KAMERA" class="img-slot-icon"></i>
+              <div class="img-slot-title">Action — Kiropraktisk behandling</div>
+              <div class="img-slot-desc">Stemningsbillede, hænder på patient i fokus.</div>
+              <div class="img-slot-format">3:4 · min. 600×800px · WebP</div>
+            </div>
+            <div class="price-image-label">PRISLISTE — KIROPRAKTOR</div>
+          </div>
+        </div>
+        <div>
+          <table class="price-table">
+            <tbody>
+              <tr><td>Forundersøgelse<br><small style="color:#999;font-size:12px;">Hvis du ikke har været i klinikken tidligere eller har et nyt problem</small></td><td>Kr. 698,44</td></tr>
+              <tr><td>Almindelig opfølgende konsultation<br><small style="color:#999;font-size:12px;">Enkelt indsats</small></td><td>Kr. 365,56</td></tr>
+              <tr><td>Udvidet opfølgende konsultation<br><small style="color:#999;font-size:12px;">Kombination af flere indsatser</small></td><td>Kr. 505,28</td></tr>
+            </tbody>
+          </table>
+          <div class="price-disclaimer">Priser følger overenskomstens takster. Sygesikringen yder automatisk tilskud uden lægehenvisning. Mange sundhedsforsikringer dækker også — forhåndsgodkendelse kan være påkrævet.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-location">
+    <div class="container">
+      <h2>Find os på Vestegnen</h2>
+      <h3>Din lokale kiropraktor klinik i Brøndby</h3>
+      <p>Du finder vores lyse og moderne faciliteter centralt placeret på Vestegnen med gode parkeringsforhold og nem adgang for gangbesværede.</p>
+      <div class="location-grid">
+        <div class="img-slot map-slot" data-img-id="KIRO-KORT">
+          <i data-ikon-id="UI-KORT" class="img-slot-icon"></i>
+          <div class="img-slot-title">Google Maps — Kiropraktor</div>
+          <div class="img-slot-desc">Indsættes af Web Koncept som iframe-embed.<br>Park Allé 156, 2605 Brøndby</div>
+          <div class="img-slot-format">iframe · samtykke påkrævet</div>
+        </div>
+        <div>
+          <h3>Hele Vestegnens sundhedshus</h3>
+          <p class="address-block"><strong>FysioDanmark Brøndby</strong><br>Park Allé 156, 1. sal<br>2605 Brøndby<br>Tlf: <a href="tel:+4543437300">43 43 73 00</a></p>
+          <p class="coverage-area">Vi hjælper patienter fra hele nærområdet: Albertslund · Brøndbyøster · Friheden · Hvidovre · Avedøre · Brøndbyvester · Gildhøj · Vallensbæk · Brøndby · Brøndby Strand · Glostrup · Rødovre</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-faq">
+    <div class="container">
+      <h2>Ofte stillede spørgsmål om kiropraktik</h2>
+      <p>Her finder du svar på de spørgsmål, vi oftest får om kiropraktisk behandling, henvisning, priser og tilskud.</p>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Hvad er forskellen på en kiropraktor og en fysioterapeut?</summary><div class="faq-answer">Selvom begge faggrupper behandler muskler og led, adskiller uddannelsen og tilgangen sig. En kiropraktor er universitetsuddannet og har en dybdegående medicinsk baggrund, der giver ret til selvstændigt at diagnosticere samt henvise til f.eks. røntgen eller MR-scanning. Kiropraktoren har særligt fokus på leddenes funktion og hvordan de påvirker muskel- og nervesystemet, mens fysioterapeuten typisk fokuserer mere på bløddele, genoptræning, muskelbalancer og bevægemønstre.</div></details>
+        <details class="faq-item"><summary>Hvad kan en kiropraktor?</summary><div class="faq-answer">En kiropraktor er specialist i at undersøge, diagnosticere, forebygge og behandle smerter og funktionsforstyrrelser i hele kroppens bevægeapparat — med særligt fokus på rygsøjlen, bækkenet og kroppens led. Kiropraktoren kan udføre præcise ledfrigørende behandlinger, give medicinsk rådgivning og sammensætte skræddersyede træningsforløb.</div></details>
+        <details class="faq-item"><summary>Hvad koster en kiropraktor?</summary><div class="faq-answer">Priserne følger de gældende takster under overenskomsten. En forundersøgelse koster Kr. 698,44. En opfølgende konsultation koster Kr. 365,56 (enkelt indsats) eller Kr. 505,28 (kombination af flere indsatser).</div></details>
+        <details class="faq-item"><summary>Skal man have henvisning til en kiropraktor?</summary><div class="faq-answer">Nej, du behøver ikke en henvisning fra din egen læge for at bestille tid hos en kiropraktor. Du kan kontakte os direkte og booke en tid, når du har brug for det. Du får automatisk det offentlige sygesikringstilskud trukket fra din regning.</div></details>
+        <details class="faq-item"><summary>Kan jeg få tilskud til kiropraktor?</summary><div class="faq-answer">Ja. Du får automatisk sygesikringstilskud trukket fra din regning uden lægehenvisning. Mange sundhedsforsikringer dækker også et behandlingsforløb hos kiropraktor — det kræver typisk en forhåndsgodkendelse direkte fra dit forsikringsselskab, ikke en lægehenvisning.</div></details>
+        <details class="faq-item"><summary>Hvad kan en kiropraktor hjælpe med?</summary><div class="faq-answer">En kiropraktor kan hjælpe med en lang række akutte og kroniske smerter i kroppen. Det gælder blandt andet hold i ryggen (lumbago), hold i nakken, diskusprolaps, spændingshovedpine, iskiassmerter, samt overbelastningsskader og smerter i skulder, hofte eller knæ.</div></details>
+        <details class="faq-item"><summary>Hvornår skal jeg gå til kiropraktor frem for fysioterapeut?</summary><div class="faq-answer">Du bør vælge en kiropraktor, hvis du har brug for at få stillet en præcis diagnose på dine smerter, hvis du oplever akutte, låste led, eller hvis dine smerter stråler ud i arme eller ben. Hos FysioDanmark Brøndby samarbejder vores kiropraktor og fysioterapeuter tæt — hvis dit problem løses bedst af den anden faggruppe, guider vi dig automatisk over til den rette specialist.</div></details>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-kiro -->
+
+
+<!-- ══════════════════════════════════════
+     PANEL: RYGSPECIALIST ENHEDEN
+══════════════════════════════════════ -->
+<div class="page-panel" id="panel-ryg">
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <h1>Specialiseret behandling af komplekse rygproblemer</h1>
+          <p class="hero-subtitle">Rygspecialist Enheden samler kiropraktor, rygkirurg og fysioterapeuter under samme tag — så du får én koordineret plan, når dit ryg- eller nakkeproblem kræver mere end én faggruppes indsats.</p>
+          <div class="btn-group">
+            <span class="btn-primary">Book en samtale</span>
+            <span class="btn-secondary" onclick="document.getElementById('ryg-priser').scrollIntoView({behavior:'smooth'})">Se priser</span>
+          </div>
+        </div>
+        <div>
+          <div class="img-slot rounded" data-img-id="RYG-HERO">
+            <i data-ikon-id="UI-KAMERA" class="img-slot-icon"></i>
+            <div class="img-slot-title">Hero — Rygspecialist Enheden</div>
+            <div class="img-slot-desc">Samlet billede af hele teamet.</div>
+            <div class="img-slot-format">16:10 · min. 1200×750px · WebP</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-practitioner">
+    <div class="container">
+      <div class="practitioner-grid">
+        <div>
+          <div class="img-slot rounded" data-img-id="RYG-PORTRAET">
+            <i data-ikon-id="UI-PERSON" class="img-slot-icon"></i>
+            <div class="img-slot-title">Portræt — Jacob</div>
+            <div class="img-slot-desc">Professionelt portræt, imødekommende udtryk.</div>
+            <div class="img-slot-format">3:4 · min. 600×800px · WebP</div>
+          </div>
+        </div>
+        <div>
+          <h2>Et tværfagligt team med rygkirurgisk erfaring</h2>
+          <p>Rygspecialist Enheden ledes af kiropraktor Jørgen Kilsgaard, der udover sin kiropraktoruddannelse har mange års erfaring som kiropraktor på rygkirurgisk afdeling i sygehussektoren og en master i folkesundhedsvidenskab (MPH).</p>
+          <p>Den erfaring betyder, at Jørgen kan vurdere komplekse rygproblemer med den faglige tyngde, der normalt kræver sygehussektoren — og tilbyde dig et samlet forløb i vante og trygge omgivelser på Vestegnen.</p>
+          <p>Enheden er særlig relevant for dig, der har haft rygproblemer i lang tid og oplever:</p>
+          <ul class="practitioner-bullets">
+            <li>Vedvarende smerter trods tidligere behandling</li>
+            <li>Nervesmerter der stråler ud i ben eller arme</li>
+            <li>Uarbejdsdygtighed eller risiko for langtidssygemelding</li>
+            <li>Brug for koordination på tværs af faggrupper</li>
+          </ul>
+          <div class="team-box">
+            <div class="team-box-label">Tilknyttet enheden</div>
+            <div class="team-box-name">Jacob Hansen-Schwartz</div>
+            <p class="team-box-title">Overlæge, Rigshospitalet Glostrup — rygkirurgisk speciallæge tilknyttet enheden ved behov for speciallægevurdering</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-treatments">
+    <div class="container">
+      <h2>Koordineret forløb tilpasset dit komplekse problem</h2>
+      <div class="treatments-intro">
+        <p>Et forløb i Rygspecialist Enheden starter altid med en grundig udredning. Vi kortlægger dit problem, din sygehistorie og hvad der påvirker din dagligdag og dit arbejdsliv — og danner os et samlet billede på tværs af de faggrupper, der er relevante for netop dig.</p>
+        <p>Herefter laver vi en koordineret plan, der beskriver hvad vi kan gøre, hvornår og i hvilken rækkefølge. Du præsenteres altid for planen og har mulighed for at stille spørgsmål, inden behandlingen starter.</p>
+        <p>Forløbet kan inkludere kiropraktisk behandling, fysioterapi, rygkirurgisk vurdering, arbejdspladsindsats og rådgivning om tilskudsmuligheder — alt under samme tag, koordineret af ét team.</p>
+      </div>
+      <h3 class="h3-treatments">Et forløb i Rygspecialist Enheden kan indeholde:</h3>
+      <div class="treatments-grid">
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="RYGT-UDREDNING"></i></div>
+          <h3>Grundig tværfaglig udredning</h3>
+          <p>En systematisk gennemgang af dit problem med inddragelse af alle relevante faggrupper. Vi bruger billediagnostik (røntgen, MR-scanning) hvis det er indiceret, og koordinerer med speciallæge ved behov.</p>
+        </div>
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="RYGT-BEHANDLING"></i></div>
+          <h3>Kiropraktisk og manuel behandling</h3>
+          <p>Målrettet ledfrigørende behandling og bløddelsbehandling af rygsøjlen, bækkenet og nakken — tilpasset dit specifikke problem og udført med hensyn til eventuelle slidforandringer eller andre sygdomsforhold.</p>
+        </div>
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="RYGT-REHAB"></i></div>
+          <h3>Rehabilitering og fase-specifik træning</h3>
+          <p>Et struktureret træningsforløb der tager udgangspunkt i din aktuelle tilstand og gradvist bygger kapacitet op. Koordineres med vores fysioterapi klinik og træningscenter med mulighed for hold- eller individuelt forløb.</p>
+        </div>
+        <div class="treatment-card">
+          <div class="treatment-icon"><i data-ikon-id="RYGT-ERHVERV"></i></div>
+          <h3>Arbejdspladsindsats og fastholdelse</h3>
+          <p>Ved risiko for eller aktuel sygemelding koordinerer vi med din arbejdsgiver og evt. kommunen. Vi udarbejder funktionsvurderinger og rådgiver om ergonomi, skånehensyn og gradvis tilbagevenden til arbejde.</p>
+        </div>
+      </div>
+      <div class="conditions-block">
+        <h3>Problemstillinger vi typisk udbreder og behandler</h3>
+        <p style="margin-bottom:18px;">Rygspecialist Enheden er særlig relevant ved:</p>
+        <ul class="conditions-grid">
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="RYGS-KRONISK"></i></div>
+            <div class="condition-card-text"><strong>Diskusprolaps og nerverodsirritation</strong><span>Vedvarende udstrålende smerter i ben eller arme, der ikke er bedret ved standardbehandling.</span></div>
+          </li>
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="RYGS-SMERTER"></i></div>
+            <div class="condition-card-text"><strong>Langvarige lænde- og nakkesmerter</strong><span>Kroniske eller tilbagevendende smerter med betydelig påvirkning af arbejds- og hverdagsfunktion.</span></div>
+          </li>
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="RYGS-SYGEMELDT"></i></div>
+            <div class="condition-card-text"><strong>Uarbejdsdygtighed og sygemelding</strong><span>Rygproblemer der har ført til eller truer med sygemelding — med behov for koordineret rehabilitering og arbejdsfastholdelse.</span></div>
+          </li>
+          <li class="condition-card">
+            <div class="condition-icon"><i data-ikon-id="RYGS-KOMPLEKS"></i></div>
+            <div class="condition-card-text"><strong>Komplekse sammensatte forløb</strong><span>Problemstillinger der kræver koordination på tværs af faggrupper, evt. med behov for rygkirurgisk vurdering.</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-multidisciplinary">
+    <div class="container">
+      <div class="multi-grid">
+        <div>
+          <h2>Dit tværfaglige sundhedshus i Brøndby</h2>
+          <h3>Én indgang — alle kompetencer samlet</h3>
+          <p>Rygspecialist Enheden er forankret i FysioDanmark Brøndby, der samler kiropraktorer, fysioterapeuter, psykolog og akupunktør under samme tag. Det betyder, at vi kan trække på hele husets kompetencer i dit forløb — uden at du skal henvises rundt til forskellige klinikker.</p>
+          <p>Har du et problem der starter som et rygproblem, men viser sig at have sammenhæng med stress, søvn eller arbejdsmiljø, har vi kompetencerne til at håndtere det samlet. Vi koordinerer og kommunikerer internt — du har ét kontaktpunkt.</p>
+          <p>Vi gennemgår også altid dine tilskudsmuligheder, herunder sygesikring og sundhedsforsikring, så du kender din økonomi i forløbet fra start.</p>
+        </div>
+        <div class="disciplines-box">
+          <div class="disciplines-label">Under ét tag</div>
+          <div class="disciplines-grid">
+            <div class="discipline-card"><i data-ikon-id="DISC-KIRO"></i><div class="discipline-card-label">Kiropraktik</div></div>
+            <div class="discipline-card"><i data-ikon-id="DISC-FYSIO"></i><div class="discipline-card-label">Fysioterapi</div></div>
+            <div class="discipline-card"><i data-ikon-id="DISC-LAEGE"></i><div class="discipline-card-label">Rygkirurg</div></div>
+            <div class="discipline-card"><i data-ikon-id="DISC-ERHVERV"></i><div class="discipline-card-label">Arbejdsplads</div></div>
+          </div>
+          <div class="disciplines-caption">Koordineret behandling på tværs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-prices" id="ryg-priser">
+    <div class="container">
+      <h2>Priser for Rygspecialist Enheden</h2>
+      <h3>Gennemskuelige priser — vi gennemgår dine tilskudsmuligheder</h3>
+      <p style="margin-bottom:32px;">Herunder finder du vores takster. Mange sundhedsforsikringer dækker forløb i enheden — vi hjælper dig med at afklare det ved første samtale.</p>
+      <div class="prices-grid">
+        <div>
+          <div class="price-image-wrap">
+            <div class="img-slot price-slot" data-img-id="RYG-ACTION">
+              <i data-ikon-id="UI-KAMERA" class="img-slot-icon"></i>
+              <div class="img-slot-title">Action — Rygspecialist behandling</div>
+              <div class="img-slot-desc">Behandlingssituation eller faglig samtale i enheden.</div>
+              <div class="img-slot-format">3:4 · min. 600×800px · WebP</div>
+            </div>
+            <div class="price-image-label">PRISLISTE — RYGSPECIALIST</div>
+          </div>
+        </div>
+        <div>
+          <table class="price-table">
+            <tbody>
+              <tr><td>Forundersøgelse<br><small style="color:#999;font-size:12px;">Hvis du ikke har været i klinikken tidligere eller har et nyt problem</small></td><td>Kr. 698,44</td></tr>
+              <tr><td>Almindelig opfølgende konsultation<br><small style="color:#999;font-size:12px;">Enkelt indsats</small></td><td>Kr. 365,56</td></tr>
+              <tr><td>Udvidet opfølgende konsultation<br><small style="color:#999;font-size:12px;">Kombination af flere indsatser</small></td><td>Kr. 505,28</td></tr>
+            </tbody>
+          </table>
+          <div class="price-disclaimer">Priser følger overenskomstens takster. Sygesikringen yder automatisk tilskud uden lægehenvisning. Mange sundhedsforsikringer dækker også — forhåndsgodkendelse kan være påkrævet. Vi hjælper dig med at afklare dette.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-location">
+    <div class="container">
+      <h2>Find os på Vestegnen</h2>
+      <h3>Rygspecialist Enheden i Brøndby</h3>
+      <p>Du finder os centralt placeret på Vestegnen med gode parkeringsforhold og nem adgang — også for gangbesværede.</p>
+      <div class="location-grid">
+        <div class="img-slot map-slot" data-img-id="RYG-KORT">
+          <i data-ikon-id="UI-KORT" class="img-slot-icon"></i>
+          <div class="img-slot-title">Google Maps — Rygspecialist</div>
+          <div class="img-slot-desc">Indsættes af Web Koncept. Park Allé 156, 2605 Brøndby</div>
+          <div class="img-slot-format">iframe · samtykke påkrævet</div>
+        </div>
+        <div>
+          <h3>Hele Vestegnens sundhedshus</h3>
+          <p class="address-block"><strong>FysioDanmark Brøndby</strong><br>Park Allé 156, 1. sal<br>2605 Brøndby<br>Tlf: <a href="tel:+4543437300">43 43 73 00</a></p>
+          <p class="coverage-area">Vi hjælper patienter fra hele nærområdet: Albertslund · Brøndbyøster · Friheden · Hvidovre · Avedøre · Brøndbyvester · Gildhøj · Vallensbæk · Brøndby · Brøndby Strand · Glostrup · Rødovre</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-faq">
+    <div class="container">
+      <h2>Ofte stillede spørgsmål om Rygspecialist Enheden</h2>
+      <p>Her finder du svar på de spørgsmål, vi oftest får om enheden, hvem den er for, og hvordan et forløb foregår.</p>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Hvad er Rygspecialist Enheden?</summary><div class="faq-answer">Rygspecialist Enheden er et specialiseret tværfagligt team hos FysioDanmark Brøndby, der behandler patienter med komplekse eller langvarige ryg- og nakkeproblemer. Teamet består af kiropraktor, tilknyttet rygkirurg, fysioterapeuter og arbejdspladskonsulenter, der samarbejder om at give dig den mest effektive og koordinerede behandling.</div></details>
+        <details class="faq-item"><summary>Hvem er Rygspecialist Enheden for?</summary><div class="faq-answer">Enheden er for dig, der har et komplekst eller sammensat ryg- eller nakkeproblem — fx diskusprolaps med vedvarende nerveudstråling, langvarig uarbejdsdygtighed på grund af rygproblemer, eller en problemstilling der kræver koordination på tværs af flere faggrupper. Du kan komme direkte eller blive henvist fra vores kiropraktor klinik.</div></details>
+        <details class="faq-item"><summary>Skal man have henvisning til Rygspecialist Enheden?</summary><div class="faq-answer">Nej, du kan kontakte os direkte. Du kan også blive henvist fra vores kiropraktor klinik, hvis dit problem vurderes at være mere egnet til enheden. Vi gennemgår altid dine tilskudsmuligheder ved første samtale.</div></details>
+        <details class="faq-item"><summary>Hvad koster et forløb i Rygspecialist Enheden?</summary><div class="faq-answer">Prisen afhænger af hvilke indsatser der indgår i dit forløb. En forundersøgelse koster Kr. 698,44. Mange sundhedsforsikringer dækker behandling i enheden — forhåndsgodkendelse kan være påkrævet. Vi gennemgår dine muligheder ved første samtale.</div></details>
+        <details class="faq-item"><summary>Hvad er forskellen på Rygspecialist Enheden og kiropraktor klinikken?</summary><div class="faq-answer">Kiropraktor klinikken behandler primært akutte og subakutte problemer i ryg, nakke og led. Rygspecialist Enheden er for mere komplekse, sammensatte eller langvarige forløb, hvor der er behov for koordination på tværs af faggrupper — herunder adgang til rygkirurgisk vurdering, arbejdspladsindsats og længerevarende rehabilitering.</div></details>
+        <details class="faq-item"><summary>Kan jeg stadig få behandling i kiropraktor klinikken sideløbende?</summary><div class="faq-answer">Ja. Da vi er et tværfagligt sundhedshus under samme tag, koordinerer faggrupperne løbende. Du kan sagtens modtage behandling fra flere enheder parallelt, hvis det giver mening for dit forløb.</div></details>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-ryg -->
+
+
+<!-- ══════════════════════════════════════
+     FÆLLES FOOTER
+══════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo-wrap">
+          <img src="assets/images/logo.png" alt="FysioDanmark Brøndby"
+               onerror="this.style.display='none'">
+        </div>
+        <p class="footer-text">Park Allé 156, 1. sal<br>2605 Brøndby</p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Kontakt</h4>
+        <p class="footer-text">
+          <a href="tel:+4543437300">+45 43 43 73 00</a><br>
+          <a href="mailto:info@fysiodanmarkbrondby.dk">info@fysiodanmarkbrondby.dk</a>
+        </p>
+      </div>
+      <div>
+        <h4 class="footer-heading">Åbningstider</h4>
+        <p class="footer-text">Mandag–fredag 8–18<br>Lørdag efter aftale</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 FysioDanmark Brøndby</span>
+      <span>CVR: XX XX XX XX · Persondatapolitik</span>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+const breadcrumbs = {
+  kiro: `<a onclick="showPanel('home')">Forside</a> › <span style="color:#555">Fagklinikker</span> › Kiropraktor klinik`,
+  ryg:  `<a onclick="showPanel('home')">Forside</a> › <span style="color:#555">Specialist enheder</span> › Rygspecialist Enheden`
+};
+
+function showPanel(name) {
+  document.querySelectorAll('.page-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+
+  // Nav-aktiv: fremhæv den rigtige dropdown-toggle
+  document.querySelectorAll('.nav-dropdown-toggle').forEach(t => t.classList.remove('active'));
+  if (name === 'kiro') document.getElementById('toggle-kiro').classList.add('active');
+  if (name === 'ryg')  document.getElementById('toggle-ryg').classList.add('active');
+
+  // Breadcrumb
+  const bar = document.getElementById('breadcrumb-bar');
+  if (breadcrumbs[name]) {
+    document.getElementById('breadcrumb-inner').innerHTML = breadcrumbs[name];
+    bar.classList.add('visible');
+  } else {
+    bar.classList.remove('visible');
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  history.replaceState(null, '', name === 'home' ? location.pathname : '#' + name);
+}
+
+// Start på korrekt panel via URL-hash
+(function() {
+  const h = location.hash.replace('#','');
+  if (h === 'kiro' || h === 'ryg') showPanel(h);
+})();
+</script>
+
+</body>
+</html>

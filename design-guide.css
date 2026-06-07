@@ -1,0 +1,129 @@
+/*
+ * ══════════════════════════════════════════════════════════════
+ *  DESIGN GUIDE — FysioDanmark Brøndby
+ *  Ret i denne fil for at ændre farver og fontstørrelser
+ *  overalt på sitet på én gang.
+ *
+ *  Filen linkes fra index.html (og fremtidige sider) via:
+ *  <link rel="stylesheet" href="design-guide.css">
+ * ══════════════════════════════════════════════════════════════
+ */
+
+:root {
+
+  /* ─────────────────────────────────────
+     BRAND FARVER
+  ───────────────────────────────────── */
+  --farve-groen:        #77B834;   /* Primær grøn — CTA-knapper, ikoner, links */
+  --farve-groen-moerk:  #68a52d;   /* Hover-tilstand for grøn */
+  --farve-graa-cta:     #82807E;   /* Sekundær grå CTA-knap */
+  --farve-graa-hover:   #6e6c6a;   /* Hover for grå knap */
+
+  /* ─────────────────────────────────────
+     TEKST FARVER
+  ───────────────────────────────────── */
+  --farve-tekst-moerk:  #2c3e2d;   /* Overskrifter, primær tekst */
+  --farve-tekst-normal: #444444;   /* Brødtekst */
+  --farve-tekst-lys:    #666666;   /* Sekundær tekst, labels */
+  --farve-tekst-meget-lys: #999999; /* Placeholders, disclaimers */
+  --farve-hvid:         #ffffff;
+
+  /* ─────────────────────────────────────
+     BAGGRUNDS FARVER
+  ───────────────────────────────────── */
+  --farve-baggrund-lys:   #F7F7F7;  /* Sektioner med lys baggrund */
+  --farve-baggrund-hvid:  #ffffff;  /* Hvide sektioner */
+  --farve-baggrund-kant:  #e8eae0;  /* Breadcrumb, subtile kanter */
+  --farve-footer:         #323232;  /* Footer baggrund */
+  --farve-kant:           #e0e0d8;  /* Kort-kanter, skillelinjer */
+
+  /* ─────────────────────────────────────
+     FONT FAMILY
+  ───────────────────────────────────── */
+  --font-hoved:   sans-serif;       /* Overskrifter (h1–h3) */
+  --font-tekst:   sans-serif;       /* Brødtekst, knapper, nav */
+
+  /* ─────────────────────────────────────
+     FONTSTØRRELSER — OVERSKRIFTER
+  ───────────────────────────────────── */
+  --fs-hero-h1:       48px;   /* Forside hero: "FysioDanmark Brøndby" */
+  --fs-hero-tagline:  36px;   /* Forside hero: "Dit tværfaglige sundhedshus" */
+  --fs-hero-overtitle: 13px;  /* "VELKOMMEN TIL" over hero-titlen */
+
+  --fs-h1:    42px;   /* Side-hero overskrifter (kiropraktor, rygspecialist) */
+  --fs-h2:    19px;   /* Sektion-overskrifter (grønne, uppercase) */
+  --fs-h3:    16px;   /* Kort-overskrifter, sub-overskrifter */
+  --fs-h3-behandling: 24px;  /* "Et behandlingsforløb vil ofte indeholde..." */
+
+  /* ─────────────────────────────────────
+     FONTSTØRRELSER — TEKST
+  ───────────────────────────────────── */
+  --fs-body:          15px;   /* Standard brødtekst */
+  --fs-hero-desc:     15px;   /* Hero-beskrivelsestekst */
+  --fs-hero-subtitle: 17px;   /* Undertitel under hero H1 på undersider */
+  --fs-knap:          14px;   /* Knapetekst */
+  --fs-nav:           14px;   /* Navigation */
+  --fs-topbar:        13px;   /* Top-bar kontaktinfo */
+  --fs-disclaimer:    13px;   /* Prisdisclaimer, noter */
+  --fs-kort-category: 12px;   /* "VORES FAGPROFESSIONER" kategori-label */
+
+  /* ─────────────────────────────────────
+     FONTVÆGTE
+  ───────────────────────────────────── */
+  --fw-light:    300;
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-extrabold: 800;
+
+  /* ─────────────────────────────────────
+     LETTER SPACING
+  ───────────────────────────────────── */
+  --ls-hero-h1:     1.5px;
+  --ls-hero-tagline: 3px;
+  --ls-overtitle:   4px;
+  --ls-h2:          2px;
+  --ls-knap:        2px;
+  --ls-nav:         0.3px;
+
+  /* ─────────────────────────────────────
+     LAYOUT & SPACING
+  ───────────────────────────────────── */
+  --radius-kort:    10px;   /* Korthjørner */
+  --radius-knap:    2px;    /* Knaphjørner */
+  --max-bredde:     1200px; /* Maks sidebredde */
+  --sektion-padding: 60px;  /* Lodret padding på sektioner */
+
+  /* ─────────────────────────────────────
+     LOGO STØRRELSER
+  ───────────────────────────────────── */
+  --logo-nav-hoejde:    50px;   /* Logo i navigationsbar */
+  --logo-footer-hoejde: 36px;   /* Logo i footer */
+
+  /* ─────────────────────────────────────
+     HERO BILLEDE (baggrund)
+  ───────────────────────────────────── */
+  --hero-billede:       url('assets/images/hero-bygning.jpg');
+  --hero-moerkhed:      0.42;  /* 0 = fuldt lyst, 1 = sort. Prøv 0.35–0.55 */
+  --hero-min-hoejde:    520px;
+}
+
+/*
+ * ── EKSEMPLER PÅ HURTIGE JUSTERINGER ──────────────────────
+ *
+ * Gør hero-titlen større:
+ *   --fs-hero-h1: 64px;
+ *
+ * Skift primærfarven til en anden grøn:
+ *   --farve-groen: #5fa020;
+ *
+ * Mørkere hero-overlay (mere dæmpet billede):
+ *   --hero-moerkhed: 0.55;
+ *
+ * Større brødtekst:
+ *   --fs-body: 16px;
+ *
+ * Rund knapform:
+ *   --radius-knap: 24px;
+ * ──────────────────────────────────────────────────────── */
